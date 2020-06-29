@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>CRUD com Bootstrap 3</title>
+
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+ 
+	<div id="main" class="container-fluid">
+	
+		<h3 class="page-header">Register Vendor</h3>
+		<hr />
+
+		<div id="form-register">
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="vendor-name">Name</label>
+					<input type="text" class="form-control" id="vendor-name" name="vendor-name" placeholder="Name">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="vendor-cnpj">CNPJ</label>
+					<input type="text" class="form-control" id="vendor-cnpj" name="vendor-cnpj" placeholder="CNPJ">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="vendor-city">City</label>
+					<input type="text" class="form-control" id="vendor-city" name="vendor-city" placeholder="City">
+				</div>
+			</div>
+			<hr>
+			
+			<div id='products-container'>
+				<h4 class="mb-n1">Products  
+					<button type="button" id="button-new" class="btn btn-sm  btn-success">+</button>
+				</h4>
+				
+				<div class="row products">
+					<div class="form-group col-md-4 col-lg-2">
+						<label for="product-name">Name</label>
+						<input type="text" class="form-control" name="product-name" placeholder="Name">
+					</div>
+	
+					<div class="form-group col-md-4 col-lg-2">
+						<label for="product-code">Code</label>
+						<input type="text" class="form-control" name="product-code" placeholder="Code">
+					</div>
+	
+					<div class="form-group col-md-4 col-lg-2">
+						<label for="product-price">Price</label>
+						<input type="text" class="form-control" name="product-price" placeholder="Price">
+					</div>
+				</div>
+			</div>
+			
+
+
+			<div class="row action-button">
+				<div class="col-md-12">
+					<button type="button" id='btn-save' class="btn btn-primary">Save</button>
+					<a href="index.html" class="btn btn-default">Cancel</a>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<script src='js/jquery.min.js'></script>
+	<script src="Scripts/components/shared/base/constants.js"></script>
+	<script src="Scripts/components/shared/http-request/http-request.js"></script>
+	<script src="Scripts/components/vendor/example.service.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js'></script>
+	<script src='Scripts/components/vendor/vendor_register.component.js'></script>
+</body>
+</html>
