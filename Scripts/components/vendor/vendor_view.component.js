@@ -1,9 +1,7 @@
 $(function () {
-    // Cria uma instância do component.
     
     component = new ViewComponent();
 
-    // Todo conteúdo nesse espaço é carregado quando a página é concluída.
 
 });
 
@@ -18,7 +16,6 @@ function ViewComponent() {
     var self = this;
     self.vendor;
 
-    // Conteúdo para ser carregado ao concluir o carregamento do component.
     var init = function () {
         self.vendor = JSON.parse(sessionStorage.getItem('vendor_data'));
         self.loadViewData();
@@ -52,8 +49,6 @@ function ViewComponent() {
         });
     }
 
-    
-     
-    // Executa o init após finalizar as definições do component.
+         
     init();
 }

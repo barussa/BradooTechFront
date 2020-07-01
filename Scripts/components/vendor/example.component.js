@@ -1,10 +1,7 @@
 $(function () {
-    // Cria uma instância do component.
     
     component = new ExampleComponent();
     
-
-    // Todo conteúdo nesse espaço é carregado quando a página é concluída.
 
 });
 
@@ -25,7 +22,6 @@ function ExampleComponent() {
     var self = this;
     self.datatable;
 
-    // Conteúdo para ser carregado ao concluir o carregamento do component.
     var init = function () {
 
         self.pesquisar();
@@ -39,9 +35,7 @@ function ExampleComponent() {
 
     self.pesquisar = function () {
 
-        // Executa o método do service
         api.listarDados().then(function (data) {
-            // Reservado para a utilização dos dados retornadaos no parâmetro "data" ao concluir a requisição.
 
             if(data != undefined && data != null && data.status == 'success')
             {
@@ -73,7 +67,6 @@ function ExampleComponent() {
                 self.datatable = $('#vendor_table').DataTable();
             }
         });
-        // Executa o método do service
 
     }
 
@@ -94,9 +87,7 @@ function ExampleComponent() {
         })
         .then((willDelete) => {
         if (willDelete) {
-            api.deleteData(vendor.id).then(function (data) {
-                // Reservado para a utilização dos dados retornadaos no parâmetro "data" ao concluir a requisição.
-    
+            api.deleteData(vendor.id).then(function (data) {    
                 
                 console.log(data);
                 if(data != undefined && data != null && data.status == 'success')
@@ -115,6 +106,5 @@ function ExampleComponent() {
         
     }
 
-    // Executa o init após finalizar as definições do component.
     init();
 }

@@ -12,7 +12,6 @@ var filters = new function Filter() {
         var vendorCnpj = $('#vendor-cnpj').val() ? $('#vendor-cnpj').val() : null;
         var vendorCity = $('#vendor-city').val() ? $('#vendor-city').val() : null;
 
-        // Passou a pegar a informação de id do vendor através da propriedade id que foi vinculada no name.
         var vendorId = $("#vendor-name").data("id");
 
         var products = [];
@@ -26,11 +25,8 @@ var filters = new function Filter() {
 
             product.id = $(this).data().id ? $(this).data().id : null;
 
-            // A inclusão do vendor_id do produto passou a ser feita aqui.
             product.vendor_id = $(this).data().vendor_id;
 
-            // Foi incluída a propriedade "removed" para todos os objetos que serão retornados.
-            // Ela é adicionada como false aqui, pelo fato de ser de um produto que está em tela, portanto, está ativo.
             product.removed = false;
 
             products.push(product);
@@ -40,7 +36,6 @@ var filters = new function Filter() {
             name: vendorName,
             CNPJ: vendorCnpj,
             city: vendorCity,
-            // A inclusão do id do vendor passou a ser feita aqui.
             id: vendorId,
             products: products
         };
@@ -57,8 +52,6 @@ function EditComponent() {
     var init = function () {
         self.vendor = JSON.parse(sessionStorage.getItem('vendor_data'));
 
-        // Método criato para testar o front sem utilizar o backend.
-        //self.CreateFakeData();
 
         self.loadViewData();       
 
@@ -66,7 +59,6 @@ function EditComponent() {
         $('#button-new').click(self.generateProductElement);
     }
 
-    // Método que cria um objeto fake do vendor para gerar dados sem o backend.
     self.CreateFakeData = function(){
         self.vendor = {
             "name": "Vendor Test",
@@ -97,13 +89,11 @@ function EditComponent() {
         $('#vendor-cnpj').val(self.vendor.cnpj);
         $('#vendor-city').val(self.vendor.city);
 
-        // Inclusão do id do vendor na propriedade id do objeto data gerado para o campo name.
         $('#vendor-name').data("id", self.vendor.id);
 
         $(self.vendor.products).each(function(i){
             var product = this;
 
-            // Adiciona o valor false na propriedade removed por padrão para todos os produtos exibidos ao carregar a tela.
             self.vendor.products[i].removed = false;
 
             if(i > 0)
@@ -117,13 +107,9 @@ function EditComponent() {
 
     self.save = function(){
         var vendor = filters.getFilters();
-        // Foi removida do método save a responsabilidade de incluir os dados de id que recebia do filter.
 
-
-        // Lista os produtos removidos para incluir no objeto que será enviado como removed = true para o backend.
         var removedProducts = self.getRemovedProducts();
 
-        // Adiciona os produtos removidos no objeto que será retornado.
         vendor.products.push(...removedProducts);
         console.log(vendor)
         api.editData(vendor).then(function (data) {
@@ -148,7 +134,6 @@ function EditComponent() {
         });
     }
 
-    // Método que atualiza os produtos do vendor caso ele tenha sido removido e adicionado novamente.
     self.updateRemovedProducts = function() {
         var formData = filters.getFilters();
         var callingObj = this;
@@ -170,8 +155,6 @@ function EditComponent() {
             <button type="button" class="btn btn-sm btn-danger">X</button>
         </div>`);
 
-        // Associa o método que atualiza os produtos que foram adicionados novamente
-        // ao evento blur do input name, dessa forma a validação é feita toda vez que o usuário clicar fora do input.
         $("[name='product-name']", templateProducts).blur(self.updateRemovedProducts);
 
         $('button.btn-danger', templateProducts).click(self.removeProductElement);
@@ -181,12 +164,10 @@ function EditComponent() {
     }
 
     self.removeProductElement = function(){
-        // Adiciona o status de removido no objeto ao clicar no botão de remover.
         self.vendor.products.filter(p => p.id == $(this).parent().parent().data().id)[0].removed = true;
         $(this).parent().parent().remove();
     }
 
-    // Retorna os objetos que foram definitivamente excluídos.
     self.getRemovedProducts = function(){
         return self.vendor.products.filter(p => p.removed);
     }

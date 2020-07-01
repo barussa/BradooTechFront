@@ -1,5 +1,4 @@
 $(function () {
-    // Cria uma instância do component.
     
     component = new RegisterComponent();
 
@@ -45,12 +44,9 @@ function RegisterComponent() {
     var api = new ExampleService();
     var self = this;
 
-    // Conteúdo para ser carregado ao concluir o carregamento do component.
     var init = function () {
         $('#btn-save').click(self.save);
         $('#button-new').click(self.generateProductElement);
-
-        self.generateTestData(2);
         
     }
 
@@ -74,7 +70,6 @@ function RegisterComponent() {
         var vendor = filters.getFilters();
 
         api.registerData(vendor).then(function (data) {
-            // Reservado para a utilização dos dados retornadaos no parâmetro "data" ao concluir a requisição.
     
             console.log(data)
             if(data != undefined && data != null && data.status == 'ok')
@@ -129,6 +124,5 @@ function RegisterComponent() {
     }
     
      
-    // Executa o init após finalizar as definições do component.
     init();
 }
